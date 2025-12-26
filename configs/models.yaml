@@ -1,0 +1,51 @@
+# Additional configuration for different model types
+
+# XGBoost configuration
+model_xgboost:
+  type: "xgboost"
+  config:
+    n_estimators: 200
+    learning_rate: 0.05
+    max_depth: 8
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+# LightGBM configuration
+model_lightgbm:
+  type: "lightgbm"
+  config:
+    n_estimators: 200
+    learning_rate: 0.05
+    max_depth: 8
+    num_leaves: 31
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+# TabNet configuration
+model_tabnet:
+  type: "tabnet"
+  config:
+    n_d: 64
+    n_a: 64
+    n_steps: 5
+    gamma: 1.5
+    n_independent: 2
+    n_shared: 2
+    lambda_sparse: 1e-3
+    learning_rate: 2e-2
+    max_epochs: 100
+    patience: 10
+    batch_size: 256
+    virtual_batch_size: 128
+    random_state: 42
+
+# Ensemble configuration
+model_ensemble:
+  type: "ensemble"
+  models:
+    - "xgboost"
+    - "lightgbm"
+    - "gradient_boosting"
+  weights: [0.4, 0.4, 0.2]

@@ -1,0 +1,63 @@
+# Default configuration for Hospital Length of Stay prediction
+
+# Data configuration
+data:
+  n_samples: 1000
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+  synthetic_data: true
+
+# Model configuration
+model:
+  type: "xgboost"  # Options: gradient_boosting, xgboost, lightgbm, tabnet
+  config:
+    n_estimators: 100
+    learning_rate: 0.1
+    max_depth: 6
+    random_state: 42
+
+# Training configuration
+training:
+  early_stopping:
+    patience: 10
+    min_delta: 0.001
+    restore_best_weights: true
+  validation_split: 0.1
+
+# Evaluation configuration
+evaluation:
+  metrics:
+    - "mae"
+    - "rmse"
+    - "r2"
+    - "mape"
+    - "within_1_day"
+    - "within_2_days"
+    - "within_3_days"
+  calibration:
+    n_bins: 10
+  fairness:
+    enabled: true
+
+# Explainability configuration
+explainability:
+  shap:
+    enabled: true
+    n_samples: 100
+  uncertainty:
+    enabled: true
+    confidence_level: 0.95
+
+# Output configuration
+output:
+  save_model: true
+  save_predictions: true
+  save_explanations: true
+  model_path: "models/"
+  results_path: "results/"
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
